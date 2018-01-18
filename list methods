@@ -1,0 +1,54 @@
+# _*_ coding:utf-8 _*_
+# lst = [1,2,3,3,5,7,13]
+#
+# print 1 in lst
+# print lst.index(3)
+# print lst.index(3)
+# print len(lst)
+# lst.append(33)#append返回none
+# print(lst)
+# print(lst.pop())
+# print(lst)
+# print(lst.pop(4))#pop返回元素
+# print(lst)
+
+import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
+
+lst = []
+
+def addtask(input_text):
+    lst.append(input_text)
+
+def remove_number(num):
+    n= int(num)
+    if 1<=n<=len(lst):
+        lst.pop(n-1)
+
+def remove_task(task):
+    if task in lst:
+        lst.pop(lst.index(task))
+
+def draw(canvas):
+    n=1
+    for task in lst:
+        pos=30*n
+        canvas.draw_text(str(n)+': '+task,[20,pos],25,'red')
+        n=n+1
+def clear():
+    global lst
+    lst=[]
+
+
+
+frame = simplegui.create_frame('list',300,300)
+frame.set_canvas_background('white')
+#frame.add_label('Add a task')
+frame.add_input('add a task',addtask,150)
+#frame.add_label('Remove a task by number')
+frame.add_input('remove task number',remove_number,150)
+#frame.add_label('Remove a task')
+frame.add_input('remove task',remove_task,150)
+frame.set_draw_handler(draw)
+frame.add_button('Clear',clear,50)
+
+frame.start()
